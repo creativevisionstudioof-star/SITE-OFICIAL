@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Creative Vision Studio — Portfólio</title>
+    <meta name="description" content="Creative Vision Studio: soluções criativas para comunicação digital. Design, conteúdo, social media e projetos digitais." />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root{
+            --bg:#0b0f1a;
+            --card:#11182a;
+            --text:#ffffff;
+            --muted:#c9cdd8;
+            --brand:#0835d6;  /* azul */
+            --brand2:#6ea8ff; /* azul claro */
+            --line:rgba(255,255,255,.10);
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            background:
+                radial-gradient(1200px 700px at 20% 10%, rgba(47,93,255,.18), transparent 55%),
+                radial-gradient(900px 600px at 80% 30%, rgba(110,168,255,.14), transparent 55%),
+                var(--bg);
+            color:var(--text);
+            line-height:1.55;
+            overflow-x: hidden; /* Evita que animações causem barra de rolagem horizontal */
+        }
+        a{color:inherit;text-decoration:none}
+        .container{max-width:1080px;margin:0 auto;padding:24px}
+        .nav{
+            position:sticky;top:0;z-index:20;
+            backdrop-filter: blur(10px);
+            background: rgba(11,15,26,.7);
+            border-bottom:1px solid var(--line);
+        }
+        .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 24px;max-width:1080px;margin:0 auto}
+        .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.2px}
+        .logo{
+            width:34px;height:34px;border-radius:10px;
+            border:1px solid var(--line);
+            background: rgba(255,255,255,.03);
+            object-fit:cover;
+        }
+        .nav-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+        .nav-links a{
+            color:var(--muted);
+            font-size:14px;
+            transition: color 0.3s ease; /* Animação: Cor */
+        }
+        .nav-links a:hover{color:var(--text)}
+        
+        .btn{
+            display:inline-flex;align-items:center;justify-content:center;
+            padding:10px 14px;border-radius:12px;
+            background: linear-gradient(135deg,var(--brand),var(--brand2));
+            color:#0b0f1a;font-weight:900;
+            border:0;cursor:pointer;
+            box-shadow:0 8px 18px rgba(47,93,255,.18);
+            transition: all 0.2s ease; /* Animação: Todos os estados */
+        }
+        .btn:hover{
+            transform: translateY(-1px); /* Levantar levemente */
+            box-shadow: 0 12px 25px rgba(47,93,255,.3); /* Sombra mais forte */
+        }
+        .btn.secondary{
+            background:transparent;color:var(--text);
+            border:1px solid var(--line);
+            box-shadow:none;
+        }
+        .btn.secondary:hover{
+            background: rgba(255,255,255,.05); /* Fundo sutil ao passar o mouse */
+            transform: translateY(-1px);
+            box-shadow: none;
+        }
+        header{padding:48px 0 22px}
+        .hero{display:grid;grid-template-columns: 1.2fr .8fr;gap:18px;align-items:stretch}
+        .hero-card{
+            background: rgba(17,24,42,.58);
+            border:1px solid var(--line);
+            border-radius:18px;
+            padding:22px;
+        }
+        .kicker{color:var(--muted);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+        h1{margin:10px 0 10px;font-size:42px;line-height:1.1}
+        .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+        
+        .badge{
+            border:1px solid var(--line);
+            background: rgba(255,255,255,.03);
+            padding:8px 10px;border-radius:999px;
+            color:var(--muted);font-size:13px;
+            transition: background 0.2s ease; /* Animação: Fundo */
+        }
+        .badge:hover{
+            background: rgba(255,255,255,.1);
+            color:var(--text);
+        }
+
+        .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin:18px 0 36px}
+        .card{
+            background: rgba(17,24,42,.58);
+            border:1px solid var(--line);
+            border-radius:18px;
+            padding:18px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação: Transformação/Sombra */
+        }
+        .card:hover{
+            transform: translateY(-4px); /* Levantar */
+            box-shadow: 0 16px 30px rgba(47,93,255,.08);
+        }
+        .card h3{margin:0 0 8px;font-size:18px}
+        .card p{margin:0;color:var(--muted)}
+        
+        /* CORREÇÃO DAS IMAGENS CORTADAS: object-fit: contain */
+        .svc-img{
+            width:100%;
+            height:150px;
+            border-radius:14px;
+            border:1px solid var(--line);
+            object-fit: contain; /* Ajusta a imagem dentro do container sem cortar */
+            background: rgba(255,255,255,.04);
+            display:block;
+            margin-bottom:12px;
+            cursor:pointer;
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+        /* Efeito hover nos cards de serviço */
+        .card .svc-img:hover{
+            transform: scale(1.01); /* Aumenta um pouco */
+            box-shadow: 0 0 0 4px var(--brand); /* Adiciona um contorno/borda de destaque */
+        }
+
+        .span-6{grid-column:span 6}
+        .span-4{grid-column:span 4}
+        .span-12{grid-column:span 12}
+        .section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin:40px 0 14px}
+        .section-title h2{margin:0;font-size:28px}
+        .section-title span{color:var(--muted);font-size:14px}
+        
+        .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+        .step{
+            border:1px solid var(--line);
+            border-radius:16px;
+            padding:12px;background: rgba(255,255,255,.02);
+            transition: all 0.3s ease; /* Animação: Todos os estados */
+        }
+        .step:hover{
+            background: rgba(110,168,255,.08); /* Destaque sutil */
+        }
+        .step b{display:block;font-size:13px}
+        .step small{color:var(--muted)}
+
+        .cta{
+            display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+            padding:18px;border-radius:18px;border:1px solid var(--line);
+            background: linear-gradient(135deg, rgba(47,93,255,.14), rgba(110,168,255,.10));
+            margin:36px 0 18px;
+        }
+        .cta p{margin:0;color:var(--muted)}
+        footer{padding:26px 0 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+        .mini{font-size:13px;color:var(--muted)}
+        .two-btns{display:flex;gap:10px;flex-wrap:wrap}
+        
+        /* Ajuste do card do benefício (para ele reagir ao hover) */
+        .hero-card .card{
+            background: transparent;
+            border:1px solid var(--line);
+            box-shadow: none;
+            transition: all 0.3s ease;
+        }
+        .hero-card .card:hover{
+            background: rgba(110,168,255,.06);
+            transform: none; /* Não levanta para não competir com os cards de Serviço */
+        }
+        
+        @media (max-width: 900px){
+            .hero{grid-template-columns:1fr}
+            .steps{grid-template-columns:1fr}
+            .span-6,.span-4{grid-column:span 12}
+            h1{font-size:34px}
+        }
+        
+        /* Modal */
+        .modal-overlay{
+            position:fixed; inset:0;
+            background: rgba(0,0,0,.7); /* Deixei mais escuro */
+            display:none;
+            align-items:center; justify-content:center;
+            padding:20px;
+            z-index:999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .modal-overlay.active{
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal{
+            width:min(760px, 96vw);
+            background: rgba(17,24,42,.95);
+            border:1px solid var(--line);
+            border-radius:18px;
+            overflow:hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,.45);
+            backdrop-filter: blur(10px);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal{
+            transform: translateY(0);
+        }
+        .modal-header{
+            display:flex; align-items:center; justify-content:space-between;
+            gap:12px;
+            padding:14px 16px;
+            border-bottom:1px solid var(--line);
+            background: rgba(255,255,255,.03);
+        }
+        .modal-title{font-weight:900}
+        .modal-close{
+            border:1px solid var(--line);
+            background: rgba(255,255,255,.02);
+            color: var(--text);
+            border-radius:12px;
+            padding:8px 10px;
+            cursor:pointer;
+            font-weight:800;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .modal-close:hover{
+            background: rgba(255,255,255,.1);
+            transform: scale(1.05);
+        }
+        .modal-body{padding:16px}
+        .modal-body p{margin:0;color:var(--muted)}
+        .modal-body .covers{margin-top:10px; color:var(--text); font-weight:800}
+        .modal-body ul{margin:10px 0 0 18px; color:var(--muted)}
+
+    
+            /* Cases */
+            .case-thumb{border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02);}
+            .case-thumb img{width:100%; height:auto; display:block; cursor: zoom-in; transition: transform .25s ease;}
+            .case-thumb img:hover{transform: scale(1.02);}
+
+            /* Lightbox */
+            #imgLightbox .modal{max-width: 980px; width: min(980px, 92vw); background: transparent; border: none; box-shadow: none; padding: 0;}
+            #imgLightbox .modal-header{display:flex; justify-content:flex-end; padding: 0 0 10px 0; background: transparent; border: none;}
+            #imgLightbox .modal-close{background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); color:#fff; border-radius: 999px; padding:10px 14px; cursor:pointer;}
+            #imgLightbox img{width:100%; height:auto; border-radius:18px; display:block; cursor: zoom-out; border:1px solid rgba(255,255,255,.12);}
+</style>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav-inner">
+            <div class="brand">
+                <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAIAAABEtEjdAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEvmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zJyI+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTEyLTEyPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPmMyMjk2MzMyLTE0N2ItNGVjMS05YjAzLWYxMGJmZGEwZGQ4MjwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5EZXNpZ24gc2VtIG5vbWUgLSAxPC9yZGY6bGk+CiAgIDwvcmRmOkFsdD4KICA8L2RjOnRpdGxlPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlv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" alt="Creative Vision Studio logo" />
+                <span>Creative Vision Studio®</span>
+            </div>
+            <div class="nav-links">
+                <a href="#sobre">Sobre</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#processo">Processo</a>
+                <a href="#diferenciais">Diferenciais</a>
+                <a href="#cases">Cases</a>
+                <a href="#contato">Contatos</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="hero">
+                <div class="hero-card" data-aos="fade-right">
+                    <div class="kicker">Soluções criativas para o digital</div>
+                    <h1>Transformamos ideias em experiências digitais.</h1>
+                    <p class="lead">
+                        A Creative Vision Studio é um estúdio criativo focado em <b>design, conteúdo, estratégia</b> e organização
+                        para ajudar pessoas, marcas e projetos a se comunicarem melhor no digital. Do simples ao completo.
+                    </p>
+
+                    <p class="lead" style="font-size:18px; margin-top:10px;">
+                        Mais do que “posts”: a gente cria <b>presença, identidade e percepção de valor</b>, com um visual consistente,
+                        comunicação clara e entregas organizadas para você se destacar no digital.
+                    </p>
+
+                    <div class="two-btns">
+                        <a class="btn" href="#servicos">Ver serviços</a>
+                    </div>
+                </div>
+                
+                <div class="hero-card" data-aos="fade-left" data-aos-delay="200">
+                    <h3 style="margin:0 0 10px;">Benefícios e Vantagens</h3>
+                    <div class="grid" style="margin:0">
+                        <div class="card span-12" data-aos="zoom-in" data-aos-delay="50"><b>Clareza</b><div class="mini">Conteúdo que comunica e não confunde.</div></div>
+                        <div class="card span-12" data-aos="zoom-in" data-aos-delay="100"><b>Estética</b><div class="mini">Visual alinhado, moderno e consistente.</div></div>
+                        <div class="card span-12" data-aos="zoom-in" data-aos-delay="150"><b>Organização</b><div class="mini">Processo definido, aprovação e entrega profissional.</div></div>
+                        <div class="card span-12" data-aos="zoom-in" data-aos-delay="200"><b>Acessibilidade</b><div class="mini">Soluções pensadas para a realidade do cliente.</div></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="sobre">
+            <h3 data-aos="fade-up" style="margin:0 0 10px;">Sobre Nós</h3>
+            <div class="grid">
+                <div class="card span-12" data-aos="fade-up">
+                    <h3 style="margin:10 0 10px;">Quem somos</h3>
+                    <p>
+                        A <b>Creative Vision Studio</b> é um estúdio criativo focado em soluções digitais que unem
+                        <b>identidade visual, conteúdo e estratégia</b> para comunicar com clareza e elevar o nível de presença
+                        no online. A gente acredita que criatividade sem objetivo vira só “arte bonita” por isso, cada entrega
+                        nasce com um propósito: <b>posicionar, comunicar e gerar percepção de valor</b>.
+                    </p>
+                    <p>
+                        Atuamos com criações pontuais e projetos completos, sempre mantendo um processo organizado:
+                        briefing, direcionamento, criação, aprovação e entrega. Isso garante mais agilidade, menos retrabalho
+                        e resultados consistentes no visual e na mensagem.
+                    </p>
+
+                    <h3 style="margin:20px 0 10px;">Nossa forma de trabalhar</h3>
+                    <p>
+                        A proposta é simples: entender o que você precisa, traduzir isso em um formato ideal e entregar com
+                        padrão profissional. Seja para marcas, projetos pessoais, eventos ou negócios locais, adaptamos o
+                        nível de complexidade e investimento para a realidade do cliente — sem perder qualidade.
+                    </p>
+
+                    <h3 style="margin:18px 0 10px;">Equipe & Direção</h3>
+                    <p>
+                        A Creative Vision Studio é liderada por <b>Philipe Gabriel</b>, responsável pela direção criativa,
+                        alinhamento de estilo e qualidade final das entregas. Trabalhamos com uma equipe enxuta e colaborativa,
+                        formada por profissionais e parceiros conforme a necessidade do projeto (design, edição, social media e suporte).
+                    </p>
+                    <p class="mini" style="margin-top:10px;">
+                        <b>Nosso compromisso:</b> comunicação clara, estética consistente e entregas organizadas — do simples ao completo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicos">
+            <div class="section-title">
+                <h2 data-aos="fade-right">Serviços</h2>
+            </div>
+
+            <div class="grid">
+                <div class="card span-6" data-aos="zoom-in-up" data-aos-delay="50">
+                    <img class="svc-img" src="assets/design.png" alt="🎨 Design & Criação Digital" data-modal-title="Design & Criação Digital" data-modal-desc="Criações visuais para fortalecer sua identidade e deixar sua comunicação mais profissional e consistente." data-modal-covers="Artes para feed e stories | Materiais digitais para divulgação | Identidade visual básica (padrões, paleta e estilo) | Criativos para campanhas e lançamentos">
+                    <h3>🎨 Design & Criação Digital</h3>
+                    <p>Artes para redes sociais, materiais digitais, conteúdo visual para divulgação e identidade visual básica para projetos.</p>
+                </div>
+
+                <div class="card span-6" data-aos="zoom-in-up" data-aos-delay="150">
+                    <img class="svc-img" src="assets/video.png" alt="🎥 Conteúdos Dinâmicos e Interativos" data-modal-title="Conteúdos Dinâmicos e Interativos" data-modal-desc="Conteúdo em movimento para aumentar retenção e impacto — ideal para destacar seu perfil e suas ofertas." data-modal-covers="Reels e vídeos curtos | Animações/Motion simples | Chamadas e anúncios em vídeo | Conteúdos interativos para eventos e redes sociais">
+                    <h3>🎥 Conteúdos Dinâmicos e Interativos</h3>
+                    <p>Vídeos curtos, conteúdos animados, materiais interativos e apresentações digitais criativas.</p>
+                </div>
+
+                <div class="card span-6" data-aos="zoom-in-up" data-aos-delay="250">
+                    <img class="svc-img" src="assets/social-media.png" alt="📱 Social Media & Conteúdo" data-modal-title="Social Media & Conteúdo" data-modal-desc="Organização e constância no Instagram com estratégia e padrão visual — para você não ficar refém do improviso." data-modal-covers="Planejamento e calendário editorial | Criação de artes e vídeos | Legendas e direcionamento de pauta | Postagem + rotina de aprovação">
+                    <h3>📱 Social Media & Conteúdo</h3>
+                    <p>Planejamento, criação de artes e vídeos, legendas, organização editorial, calendário e postagem.</p>
+                </div>
+
+                <div class="card span-6" data-aos="zoom-in-up" data-aos-delay="350">
+                    <img class="svc-img" src="assets/web.png" alt="🌐 Projetos Digitais" data-modal-title="Projetos Digitais" data-modal-desc="Páginas simples e objetivas para apresentar, divulgar e centralizar informações com estética e clareza." data-modal-covers="Landing pages (página única) | Portfólio digital | Página de serviços/contato | Estruturas em formato de site para campanhas">
+                    <h3>🌐 Projetos Digitais</h3>
+                    <p>Páginas simples e responsivas para apresentar informações e divulgar projetos.</p>
+                </div>
+
+                <div class="card span-12" data-aos="fade-up" data-aos-delay="450">
+                    <img class="svc-img" style="height:180px" src="assets/sob-medida.png" alt="Projetos Sob Medida" data-modal-title="Projetos Sob Medida" data-modal-desc="Quando você quer algo personalizado: analisamos seu objetivo e montamos a melhor solução, combinando formatos e entregas." data-modal-covers="Pacotes personalizados | Combinação de design + vídeo + social | Materiais para eventos e lançamentos | Ajuste de escopo conforme necessidade">
+                    <h3>🎯 Projetos Sob Medida</h3>
+                    <p>Definimos o formato ideal conforme o objetivo do cliente — sem soluções engessadas.</p>
+                </div>
+            </div>
+
+            <div class="cta" data-aos="fade-up">
+                <div>
+                    <b style="font-size:16px">Não sabe qual formato escolher?</b>
+                    <p>Você explica a necessidade, a gente recomenda a solução ideal.</p>
+                </div>
+                <a class="btn" href="#contato">Falar com a Creative Vision</a>
+            </div>
+        </section>
+
+        <section id="processo">
+            <div class="section-title">
+                <h2 data-aos="fade-right">Processo</h2>
+            </div>
+
+            <div class="steps">
+                <div class="step" data-aos="fade-up" data-aos-delay="50"><b>1) Entendimento</b><small>Você explica o objetivo.</small></div>
+                <div class="step" data-aos="fade-up" data-aos-delay="150"><b>2) Direcionamento</b><small>Definimos a solução.</small></div>
+                <div class="step" data-aos="fade-up" data-aos-delay="250"><b>3) Criação</b><small>Produção com estética.</small></div>
+                <div class="step" data-aos="fade-up" data-aos-delay="350"><b>4) Aprovação</b><small>Validação antes de publicar.</small></div>
+                <div class="step" data-aos="fade-up" data-aos-delay="450"><b>5) Entrega</b><small>Finalização e organização.</small></div>
+            </div>
+        </section>
+
+        <section id="diferenciais">
+            <div class="section-title">
+                <h2 data-aos="fade-right">Diferenciais</h2>
+            </div>
+
+            <div class="grid">
+                <div class="card span-4" data-aos="fade-left" data-aos-delay="50"><h3>✅ Criativo e prático</h3><p>Estética + objetivo: conteúdo que faz sentido.</p></div>
+                <div class="card span-4" data-aos="fade-left" data-aos-delay="150"><h3>✅ Linguagem simples</h3><p>Clareza em cada etapa e entrega.</p></div>
+                <div class="card span-4" data-aos="fade-left" data-aos-delay="250"><h3>✅ Atenção aos detalhes</h3><p>Acabamento, consistência e organização.</p></div>
+                <div class="card span-6" data-aos="fade-left" data-aos-delay="350"><h3>✅ Processo organizado</h3><p>Briefing, aprovação e entregas alinhadas.</p></div>
+                <div class="card span-6" data-aos="fade-left" data-aos-delay="450"><h3>✅ Soluções acessíveis</h3><p>Opções pensadas para a realidade do cliente.</p></div>
+            </div>
+        </section>
+
+        <section id="cases">
+            <div class="section-title">
+                <h2 data-aos="fade-right">Cases</h2>
+            </div>
+
+            <div class="grid">
+                <div class="card span-6" data-aos="flip-up" data-aos-delay="50">
+                    <div class="case-thumb">
+                        <img class="case-img" src="assets/cases/6.jpg" data-full="assets/cases/6.jpg" alt="Case 01" loading="lazy">
+                    </div>
+                    <h3 style="margin-top:14px;">Case 01</h3>
+                    <p class="mini">Clique na imagem para ampliar.</p>
+                </div>
+
+                <div class="card span-6" data-aos="flip-up" data-aos-delay="100">
+                    <div class="case-thumb">
+                        <img class="case-img" src="assets/cases/7.jpg" data-full="assets/cases/7.jpg" alt="Case 02" loading="lazy">
+                    </div>
+                    <h3 style="margin-top:14px;">Case 02</h3>
+                    <p class="mini">Clique na imagem para ampliar.</p>
+                </div>
+
+                <div class="card span-6" data-aos="flip-up" data-aos-delay="150">
+                    <div class="case-thumb">
+                        <img class="case-img" src="assets/cases/8.jpg" data-full="assets/cases/8.jpg" alt="Case 03" loading="lazy">
+                    </div>
+                    <h3 style="margin-top:14px;">Case 03</h3>
+                    <p class="mini">Clique na imagem para ampliar.</p>
+                </div>
+
+                <div class="card span-6" data-aos="flip-up" data-aos-delay="200">
+                    <div class="case-thumb">
+                        <img class="case-img" src="assets/cases/9.jpg" data-full="assets/cases/9.jpg" alt="Case 04" loading="lazy">
+                    </div>
+                    <h3 style="margin-top:14px;">Case 04</h3>
+                    <p class="mini">Clique na imagem para ampliar.</p>
+                </div>
+</div>
+        </section>
+
+        <section id="contato">
+            <div class="section-title">
+                <h2 data-aos="fade-right">Contato</h2>
+            </div>
+
+            <div class="grid">
+                <div class="card span-6" data-aos="fade-up">
+                    <h3>📲 WhatsApp</h3>
+                    <p class="mini">Clique para chamar agora:</p>
+                    <a class="btn" style="margin-top:10px" href="https://wa.me/5521994045531" target="_blank" rel="noopener">
+                        Falar no WhatsApp
+                    </a>
+                </div>
+
+                <div class="card span-6" data-aos="fade-up" data-aos-delay="100">
+                    <h3>📷 Instagram</h3>
+                    <p class="mini">Acompanhe e peça orçamento pelo direct:</p>
+                    <a class="btn secondary" style="margin-top:10px" href="https://instagram.com/creativevisionofc" target="_blank" rel="noopener">
+                        @creativevisionofc
+                    </a>
+                </div>
+
+                <div class="card span-12" data-aos="fade-up" data-aos-delay="200">
+                    <h3>📩 Para agilizar</h3>
+                    <p>Envie: (1) o que você precisa, (2) prazo, (3) referência (se tiver), (4) onde será publicado.</p>
+                </div>
+            </div>
+
+            <div class="cta" data-aos="fade-up">
+                <div>
+                    <b style="font-size:16px">Pronto para profissionalizar sua presença digital?</b>
+                    <p>Chame e conte o que você precisa — a gente indica a melhor solução.</p>
+                </div>
+                <a class="btn" href="https://wa.me/5521994045531" target="_blank" rel="noopener">Começar agora</a>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span> Creative Vision Studio — Portfólio. <br/>
+            <span class="mini">Use este link na bio e como cartão de visita no WhatsApp.</span>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+        // Esta função deve ser a primeira a ser chamada no final do BODY
+        AOS.init({
+            duration: 800, // Duração da animação em milissegundos
+            once: true // Animação só acontece uma vez ao rolar a página
+        });
+    </script>
+
+    <div class="modal-overlay" id="svcModal">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="svcModalTitle">
+            <div class="modal-header">
+                <div class="modal-title" id="svcModalTitle">Título</div>
+                <button class="modal-close" id="svcModalClose" aria-label="Fechar">Fechar ✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="svcModalDesc"></p>
+                <div class="covers" id="svcModalCoversLabel">O que cobre:</div>
+                <ul id="svcModalCovers"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            const overlay = document.getElementById('svcModal');
+            const closeBtn = document.getElementById('svcModalClose');
+            const titleEl = document.getElementById('svcModalTitle');
+            const descEl = document.getElementById('svcModalDesc');
+            const coversEl = document.getElementById('svcModalCovers');
+
+            function openModal(data){
+                titleEl.textContent = data.title || '';
+                descEl.textContent = data.desc || '';
+                coversEl.innerHTML = '';
+                (data.covers || []).forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    coversEl.appendChild(li);
+                });
+                overlay.classList.add('active'); // Usa classe para animação
+            }
+
+            function closeModal(){
+                overlay.classList.remove('active'); // Usa classe para animação
+            }
+
+            document.querySelectorAll('.svc-img').forEach(img => {
+                img.addEventListener('click', () => {
+                    const coversRaw = img.getAttribute('data-modal-covers') || '';
+                    const covers = coversRaw.split(' | ').map(s => s.trim()).filter(Boolean);
+                    openModal({
+                        title: img.getAttribute('data-modal-title'),
+                        desc: img.getAttribute('data-modal-desc'),
+                        covers
+                    });
+                });
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            overlay.addEventListener('click', (e) => {
+                // Fechar o modal apenas se o clique for no overlay (fora da janela)
+                if(e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'Escape') closeModal();
+            });
+        })();
+    </script>
+
+
+    <!-- Lightbox para Cases -->
+    <div class="modal-overlay" id="imgLightbox" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+            <div class="modal-header">
+                <button class="modal-close" id="imgLightboxClose" aria-label="Fechar">Fechar ✕</button>
+            </div>
+            <div class="modal-body" style="padding:0; background:transparent;">
+                <img id="imgLightboxImg" src="" alt="Imagem ampliada">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            const box = document.getElementById('imgLightbox');
+            const img = document.getElementById('imgLightboxImg');
+            const close = document.getElementById('imgLightboxClose');
+
+            function open(src, alt){
+                img.src = src;
+                img.alt = alt || 'Imagem ampliada';
+                box.classList.add('active');
+                box.setAttribute('aria-hidden','false');
+            }
+            function hide(){
+                box.classList.remove('active');
+                box.setAttribute('aria-hidden','true');
+                img.src = '';
+            }
+
+            document.querySelectorAll('.case-img').forEach(el => {
+                el.addEventListener('click', () => open(el.getAttribute('data-full') || el.src, el.alt));
+            });
+
+            close && close.addEventListener('click', hide);
+            box && box.addEventListener('click', (e) => { if(e.target === box) hide(); });
+            img && img.addEventListener('click', hide);
+            document.addEventListener('keydown', (e) => { if(e.key === 'Escape') hide(); });
+        })();
+    </script>
+</body>
+</html>
